@@ -213,7 +213,7 @@ static FlMethodResponse* set_aspect_ratio(WindowManagerPlugin* self,
         static_cast<GdkWindowHints>(self->window_hints & ~GDK_HINT_ASPECT);
   }
 
-  gdk_window_set_geometry_hints(get_gdk_window(self), &self->window_geometry,
+  gtk_window_set_geometry_hints(get_window(self), nullptr, &self->window_geometry,
                                 self->window_hints);
   g_autoptr(FlValue) result = fl_value_new_bool(true);
   return FL_METHOD_RESPONSE(fl_method_success_response_new(result));
@@ -309,7 +309,7 @@ static FlMethodResponse* set_minimum_size(WindowManagerPlugin* self,
         static_cast<GdkWindowHints>(self->window_hints & ~GDK_HINT_MIN_SIZE);
   }
 
-  gdk_window_set_geometry_hints(get_gdk_window(self), &self->window_geometry,
+  gtk_window_set_geometry_hints(get_window(self), nullptr, &self->window_geometry,
                                 self->window_hints);
 
   g_autoptr(FlValue) result = fl_value_new_bool(true);
@@ -338,7 +338,7 @@ static FlMethodResponse* set_maximum_size(WindowManagerPlugin* self,
   if (self->window_geometry.max_height < 0)
     self->window_geometry.max_height = G_MAXINT;
 
-  gdk_window_set_geometry_hints(get_gdk_window(self), &self->window_geometry,
+  gtk_window_set_geometry_hints(get_window(self), nullptr, &self->window_geometry,
                                 self->window_hints);
 
   g_autoptr(FlValue) result = fl_value_new_bool(true);
