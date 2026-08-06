@@ -28,7 +28,7 @@ bool IsWindows11OrGreater() {
     dwBuild = (DWORD)(HIWORD(dwVersion));
 #pragma warning(pop)
 
-  return dwBuild < 22000;
+  return dwBuild >= 22000;
 }
 
 class WindowManagerPlugin : public flutter::Plugin {
