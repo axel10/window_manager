@@ -168,9 +168,9 @@ std::optional<LRESULT> WindowManagerPlugin::HandleWindowProc(HWND hWnd,
         adjustNCCALCSIZE(hWnd, reinterpret_cast<NCCALCSIZE_PARAMS*>(lParam));
       } else {
         NCCALCSIZE_PARAMS* sz = reinterpret_cast<NCCALCSIZE_PARAMS*>(lParam);
-        // on windows 10, if set to 0, there's a white line at the top
-        // of the app and I've yet to find a way to remove that.
-        sz->rgrc[0].top += IsWindows11OrGreater() ? 0 : 1;
+        // Do not add top offset on Windows 10, otherwise DWM interprets the non-zero
+        // non-client top margin as having a native caption and renders the system title bar.
+        sz->rgrc[0].top += 0;
         // The following lines are required for resizing the window.
         // https://github.com/leanflutter/window_manager/issues/483
         sz->rgrc[0].right -= 8;
